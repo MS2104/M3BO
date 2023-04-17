@@ -13,6 +13,9 @@ public class GunV2 : MonoBehaviour
 
     public AudioSource shotSource;
 
+    public Transform muzzle;
+    public TrailRenderer Trail;
+
     // SHOUTOUT NAAR BRACKEYS ALS ZIJ NIET BESTONDEN ZOU IK NOOIT EEN WERKEND WAPEN HEBBEN
 
     // Update is called once per frame
@@ -39,8 +42,17 @@ public class GunV2 : MonoBehaviour
     {
         ammo--;
         RaycastHit hit;
+
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
+            var bullet = Instantiate(Trail, muzzle.position, Quaternion.identity);
+            bullet.AddPosition(muzzle.position);
+            {
+                bullet.transform.position = transform.position + (fpsCam.transform.forward * 200);
+            }
+
+            bullet.transform.position = hit.point;
+
             Debug.Log(hit.transform.name);
 
             Target target = hit.transform.GetComponent<Target>();
