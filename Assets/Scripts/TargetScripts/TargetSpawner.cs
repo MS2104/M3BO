@@ -6,15 +6,22 @@ public class TargetSpawner : MonoBehaviour
 {
     public int spawnedTargets = 0;
     [SerializeField] public int maxTargets = 5;
+
     public GameObject[] objectArray;
+    public GameObject[] rareObjects;
+    public GameObject[] superRareObjects;
+
     public Transform[] positionArray;
+
+    int rng;
+
+    private GameObject randomObject;
 
     private List<Transform> usedPositions = new List<Transform>();
 
     void SpawnRandomObject()
     {
-        // Get a random object from the objectArray
-        GameObject randomObject = objectArray[Random.Range(0, objectArray.Length)];
+        pickObject();
 
         // Get a random position from the positionArray that hasn't been used before
         Transform randomPosition = GetRandomUnusedPosition();
@@ -39,6 +46,28 @@ public class TargetSpawner : MonoBehaviour
 
         spawnedTargets++;
     }
+
+    void pickObject()
+    {
+        rng = Random.Range(0, 100);
+
+        if (rng < 60)
+        {
+            // 60% chance to pick an object from the objectArray
+            randomObject = objectArray[Random.Range(0, objectArray.Length)];
+        }
+        else if (rng >= 60 && rng < 95)
+        {
+            // 35% chance to spawn an object from the rareObjects array.
+            randomObject = rareObjects[Random.Range(0, rareObjects.Length)];
+        }
+        else
+        {
+            // 5% chance to spawn an object from the superRareObjects array.
+            randomObject = superRareObjects[Random.Range(0, superRareObjects.Length)];
+        }
+    }
+
 
     Transform GetRandomUnusedPosition()
     {

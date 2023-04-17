@@ -3,7 +3,11 @@ guid: 1798e2ba68d58c742986482ee2ad208d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - scoringScript: {instanceID: 0}
+  - destroyEffect: {instanceID: 0}
+  - scoreDisplayObj: {fileID: 1491857540331519357, guid: 460667db65249d74d91ac3387ae611a4, type: 3}
+  - audioFile: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
